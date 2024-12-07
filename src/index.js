@@ -1,12 +1,14 @@
 const express = require("express");
 const mongoose = require("mongoose")
 const userRoutes = require("./Routes/userRoutes")
+const productRoutes = require("./Routes/productsRoute")
 
 require('dotenv').config();
 
 const app = express()
 app.use(express.json())
 app.use("/api", userRoutes)
+app.use("/api", productRoutes)
 
 app.get("/", (req, res) => {
     res.send("Hello World")
