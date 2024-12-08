@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 
-// Modelo que calcula la compra de un producto
 const purchaseSchema = new mongoose.Schema({
     id_user: { type: String, required: true },
     id_product: { type: String, required: true },
@@ -9,7 +8,7 @@ const purchaseSchema = new mongoose.Schema({
     total: { type: Number } 
 });
 
-
+//675621f1be8af901c9987fd2
 purchaseSchema.pre('save', function (next) {
     this.total = this.priceForUnit * this.quantity;
     next();
