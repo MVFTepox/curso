@@ -14,9 +14,8 @@ const fileFilter = (req, file, cb) => {
     if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
         cb(null, true)
     } else {
-        cb(null, false)
+        cb(null, false, new Error("formato invalido"))
     }
 }
-
 
 module.exports = multer({ storage, fileFilter, limits: { fileSize: 1024 * 1024 * 5 } })

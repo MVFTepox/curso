@@ -7,9 +7,10 @@ router.post("/product", upload.single("img"), (req, res) => {
   const { img, name, price, description, category, stock, id_admin } = req.body;
 
   const baseUrl = req.protocol + "://" + req.get("host") + "/";
-
+  //              http            ://     localhost:3000   /
   if (req.file) {
     req.body.img = baseUrl + req.file.filename;
+//                  http://localhost:3000/nombredelarchivo
   }
  
 
