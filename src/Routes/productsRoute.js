@@ -1,19 +1,36 @@
 const express = require("express");
 const router = express.Router();
 const Product = require("../models/products");
+const upload = require("../Middleware/Upload");
 
-router.post("/product", (req, res) => {
-  const product = new Product(req.body);
-  if (product) {
-    product
-      .save()
-      .then((product) => {
-        res.status(201).send(product);
-      })
-      .catch((error) => {
-        res.status(400).send("No hay datos" + error);
-      });
+router.post("/product", upload.single("img"), (req, res) => {
+  const { img, name, price, description, category, stock, id_admin } = req.body;
+
+  const baseUrl = req.protocol + "://" + req.get("host") + "/";
+
+  if (req.file) {
+    req.body.img = baseUrl + req.file.filename;
   }
+ 
+
+  const product = new Product({
+    img: req.body.img,
+    name,
+    price,
+    description,
+    category,
+    stock,
+    id_admin
+  });
+
+  product
+    .save()
+    .then((product) => {
+      res.status(201).send(product);
+    })
+    .catch((error) => {
+      res.status(400).send("No hay datos" + error);
+    });
 });
 
 router.get("/product", (req, res) => {
@@ -90,6 +107,5 @@ router.get("/product/id_admin/:id_admin", (req, res) => {
       res.status(404).send("No hay datos" + error);
     });
 });
-
 
 module.exports = router;

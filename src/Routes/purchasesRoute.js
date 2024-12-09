@@ -51,5 +51,33 @@ router.delete("/purchase/:id", (req, res) => {
             res.status(404).send("No hay datos" + error);
         });
 });
+//historial
+router.get("/purchase/id_user/:id_user", (req, res) => {
+    Purchase.find({ id_user: req.params.id_user })
+        .then((purchase) => {
+            if (!purchase) {
+                return res.status(404).send("No hay datos");
+            }
+            res.send(purchase);
+        })
+        .catch((error) => {
+            res.status(404).send("No hay datos" + error);
+        });
+});
+
+//borrar el historial de un usario
+router.delete("/purchase/id_user/:id_user", (req, res) => {
+    Purchase.deleteMany({ id_user: req.params.id_user })
+        .then((purchase) => {
+            if (!purchase) {
+                return res.status(404).send("No hay datos");
+            }
+            res.send(purchase);
+        })
+        .catch((error) => {
+            res.status(404).send("No hay datos" + error);
+        });
+});
+
 
 module.exports = router;

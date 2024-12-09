@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const purchaseSchema = new mongoose.Schema({
     id_user: { type: String, required: true },
     id_product: { type: String, required: true },
+    nameProduct: { type: String, required: true },
     quantity: { type: Number, required: true },
     priceForUnit: { type: Number, required: true },
     total: { type: Number } 

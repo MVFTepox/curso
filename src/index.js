@@ -6,6 +6,8 @@ const purchasesRoutes = require("./Routes/purchasesRoute")
 require('dotenv').config();
 
 const app = express()
+
+app.use(express.static('public'))
 app.use(express.json())
 app.use("/api", userRoutes)
 app.use("/api", productRoutes)
